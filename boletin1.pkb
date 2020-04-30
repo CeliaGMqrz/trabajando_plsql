@@ -94,6 +94,11 @@ BEGIN
     UPDATE dept 
     SET loc = p_locnueva
     WHERE deptno = p_numdep;
+    if SQL%ROWCOUNT=1 then 
+        dbms_output.put_line('Se ha modificado la fila.');
+    else
+        dbms_output.put_line('Departamento no encontrado, no se ha modificado nada.');
+    end if;
 END ej9;
 /
 
