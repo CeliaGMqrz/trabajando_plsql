@@ -126,3 +126,27 @@ END ej11;
 exec ej11(3)
 
 -- 13. Procedimiento que recibe una letra e imprima si es vocal o consonante.
+
+CREATE OR REPLACE PROCEDURE ej13(p_letra VARCHAR2)
+IS 
+BEGIN 
+    if upper(p_letra) in ('A','E','I','O','U') then 
+      dbms_output.put_line(p_letra||' es vocal');
+    else
+      dbms_output.put_line(p_letra||' es consonante');
+    end if;
+END ej13;
+/
+exec ej13(a)
+
+-- Manera más eficiente 
+
+create or replace procedure MostrarVocaloConsonante (p_letra CHAR)
+is
+  v_resultado VARCHAR2(10):='Consonante';
+begin
+  if p_letra in ('A','E','I','O','U') then
+    v_resultado := 'Vocal';
+  end if;
+  dbms_output.put_line(p_letra||' es una '||v_resultado);
+end MostrarVocaloConsonante;
