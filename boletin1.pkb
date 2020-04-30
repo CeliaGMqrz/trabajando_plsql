@@ -113,4 +113,16 @@ END ej11;
 /
 exec ej11(3)
 
+--CORRECCIÓN-- Está bien pero no era necesario una variable auxiliar.
+
+CREATE OR REPLACE PROCEDURE ej11(p_numero NUMBER)
+IS
+BEGIN 
+    for i in 1..10 loop
+    dbms_output.put_line(i||' X '||p_numero||' = '||p_numero*i);
+    end loop;
+END ej11;
+/
+exec ej11(3)
+
 -- 13. Procedimiento que recibe una letra e imprima si es vocal o consonante.
