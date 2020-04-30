@@ -1,5 +1,6 @@
 
---BOLETIN 1--
+--BOLETIN 1-- Boletín resuelto sobre el usuario scott.
+
 -- Activamos la salida de errores.
 set serveroutput on;
 --1. Hacer un procedimiento que muestre el nombre y el salario del empleado cuyo código es 7082--
@@ -31,7 +32,20 @@ END ej2;
 /
 exec ej2(7844);
 
--- 
+-- 3. Crear un procedimiento PL/SQL que cuente el número de filas que hay en la tabla EMP(de Scott),
+-- deposita el resultado en una variable y visualiza su contenido.
+
+CREATE OR REPLACE PROCEDURE ej3
+IS 
+    v_numerofilas NUMBER(2);
+BEGIN 
+    SELECT count(empno) into v_numerofilas
+    FROM emp;
+    dbms_output.put_line('Nº de filas: '||v_numerofilas);
+END ej3;
+/
+exec ej3;
+
 
 
 
