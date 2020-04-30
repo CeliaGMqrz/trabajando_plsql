@@ -87,6 +87,8 @@ END ej8;
 exec ej8(7902)
 
 -- 9. Escribir un procedimiento que modifique la localidad de un departamento. El procedimiento recibirá como parámetros el número del departamento y la localidad nueva.
+-- Nota: Los update no generan errores si no se encuentran los parametros introducidos, por lo que usaremos un if , si se ha modificado o no algun registro nos mostrará un mensaje.
+-- Hay que recordar que para que putline funcione tenemos que hacer un set serveroutput on al inicio de la sesión.
 
 CREATE OR REPLACE PROCEDURE ej9(p_numdep dept.deptno%TYPE, p_locnueva dept.loc%TYPE)
 IS 
