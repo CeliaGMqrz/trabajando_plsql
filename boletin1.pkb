@@ -1,5 +1,5 @@
 
---BOLETIN 1-- Boletín resuelto sobre el usuario scott.
+--BOLETIN 1-- 
 
 -- Activamos la salida de errores.
 set serveroutput on;
@@ -46,6 +46,22 @@ END ej3;
 /
 exec ej3;
 
+--4. Codificar un procedimiento que reciba una cadena y la visualice al revés. 
+--(Se puede hacer también omitiendo el reverse y poniendo el índice negativo).
 
+CREATE OR REPLACE PROCEDURE ej4(p_cadena VARCHAR2) 
+IS 
+    v_cadenareves VARCHAR2(10):='';
+BEGIN 
+    FOR i IN REVERSE 1..LENGTH(p_cadena) LOOP
+        v_cadenareves:=v_cadenareves||SUBSTR(p_cadena,i,1);
+    END LOOP;
+    dbms_output.put_line('Cadena al revés: '||v_cadenareves);
+END ej4;
+/
+exec ej4('Celia')
+
+--5. Escribir un procedimiento que reciba una fecha y escriba el año, en número, correspondiente a esa fecha.
+--6. Codificar un procedimiento que reciba una lista de hasta 5 números y visualice su suma.
 
 
