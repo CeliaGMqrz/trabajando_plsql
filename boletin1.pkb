@@ -62,6 +62,26 @@ END ej4;
 exec ej4('Celia')
 
 --5. Escribir un procedimiento que reciba una fecha y escriba el año, en número, correspondiente a esa fecha.
+
+CREATE OR REPLACE PROCEDURE ej5(p_fecha DATE)
+IS 
+    v_anio NUMBER(4):='';
+BEGIN 
+    v_anio := TO_NUMBER(TO_CHAR(p_fecha, 'YYYY'));
+    dbms_output.put_line('Año: '||v_anio);
+END ej5;
+/
+
+exec ej5(to_date('04/10/1995'))
+
+
+
+
+
+
+
+
+
 --6. Codificar un procedimiento que reciba una lista de hasta 5 números y visualice su suma.
 
 
