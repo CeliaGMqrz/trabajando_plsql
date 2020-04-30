@@ -74,14 +74,14 @@ END ej5;
 
 exec ej5(to_date('04/10/1995'))
 
+-- 8. Codificar un procedimiento que permita borrar un empleado cuyo número se pasará en la llamada.
 
+CREATE OR REPLACE PROCEDURE ej8(p_empno emp.empno%TYPE)
+IS 
+BEGIN 
+    DELETE FROM emp 
+    WHERE empno=p_empno;
+END;
+/
 
-
-
-
-
-
-
---6. Codificar un procedimiento que reciba una lista de hasta 5 números y visualice su suma.
-
-
+exec ej8(7902)
