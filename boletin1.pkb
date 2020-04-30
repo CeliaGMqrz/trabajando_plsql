@@ -81,7 +81,36 @@ IS
 BEGIN 
     DELETE FROM emp 
     WHERE empno=p_empno;
-END;
+END ej8;
 /
 
 exec ej8(7902)
+
+-- 9. Escribir un procedimiento que modifique la localidad de un departamento. El procedimiento recibirá como parámetros el número del departamento y la localidad nueva.
+
+CREATE OR REPLACE PROCEDURE ej9(p_numdep dept.deptno%TYPE, p_locnueva dept.loc%TYPE)
+IS 
+BEGIN 
+    UPDATE dept 
+    SET loc = p_locnueva
+    WHERE deptno = p_numdep;
+END ej9;
+/
+
+exec ej9(10,'Sevilla')
+
+-- 11. Realizar un procedimiento que reciba un número y muestre su tabla de multiplicar.
+
+CREATE OR REPLACE PROCEDURE ej11(p_numero NUMBER)
+IS
+    v_resultado NUMBER(4):='';
+BEGIN 
+    for i in 1..10 loop
+    v_resultado := i*p_numero;
+    dbms_output.put_line(i||' X '||p_numero||' = '||v_resultado);
+    end loop;
+END ej11;
+/
+exec ej11(3)
+
+-- 13. Procedimiento que recibe una letra e imprima si es vocal o consonante.
