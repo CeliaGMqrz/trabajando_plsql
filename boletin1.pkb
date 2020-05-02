@@ -157,3 +157,106 @@ begin
   end if;
   dbms_output.put_line(p_letra||' es una '||v_resultado);
 end MostrarVocaloConsonante;
+
+--16. Diseñar un procedimiento que recibe por parámetros dos valores numéricos que representan la
+--base y el exponente de una potencia donde el exponente es un número entero positivo o negativo. El
+--procedimiento visualiza el valor de la potencia, teniendo en cuenta las siguientes consideraciones:
+--1) Si la base y el exponente son cero, se mostrará un mensaje de error que diga "Datos erróneos".
+--2) Si el exponente es cero la potencia es 1.
+--3) Si el exponente es negativo la fórmula matemática de la potencia es pot = 1/base^exp. En este caso,
+--si la base es cero escribir un mensaje de "Datos erróneos".
+--Nota: No utilizar ninguna función que calcule la potencia.
+
+-- Para ello necesitamos dos funciones, una que calcule una potencia postiva, y una potencia negativa, después llamamos a las funciones en el procedimiento.
+
+--Función potencia positiva.
+
+CREATE OR REPLACE function potenciapositiva(p_base NUMBER, p_exponente NUMBER)
+RETURN FLOAT
+IS 
+        v_resultado FLOAT:=1.0;
+BEGIN 
+        for i in 1..p_exponente loop
+            v_resultado:=p_base*v_resultado;
+        end loop;
+        return v_resultado;
+END potenciapositiva;
+
+--Para probar la función:
+select potenciapositiva(2,3) from dual;
+
+-- Función potencia negativa.
+
+CREATE OR REPLACE function potencianegativa(p_base NUMBER, p_exponente NUMBER)
+RETURN FLOAT
+IS 
+        v_resultado FLOAT:=1.0;
+BEGIN 
+        if p_base = 0 then
+            raise_application_error(-20001,'Datos Erróneos');
+        end if;
+        if p_exponente < 0 then
+        v_resultado:=1/potenciapositiva(p_base,-1*p_exponente);
+        return v_resultado;
+        end if;
+END potencianegativa;
+
+-- Procedimiento potencia
+CREATE OR REPLACE procedure Potencia (p_base NUMBER, p_exponente NUMBER)
+IS
+  v_resultado FLOAT:=1.0;
+BEGIN
+  if p_base = 0 and p_exponente = 0 then
+    raise_application_error(-20001,'Datos Erróneos');
+   elsif p_exponente < 0 then
+    v_resultado:= potencianegativa(p_base, p_exponente);
+   elsif p_exponente > 0 then
+    v_resultado:= potenciapositiva(p_base, p_exponente);
+  end if;
+  dbms_output.put_line('Resultado= '||v_resultado);
+END Potencia;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+--19. Cree una tabla Tabla_Articulos con los siguientes atributos: código,
+--nombre, precio e IVA. Introduzca datos de prueba utilizando la sentencia
+--INSERT.
+--CREATE TABLE Tabla_Articulos (
+--codigo VARCHAR(5) PRIMARY KEY,
+--nombre VARCHAR(20),
+--precio NUMBER,
+--IVA NUMBER);
+
+--a) Construya un procedimiento que compruebe si el precio del artículo cuyo código es ‘A001’ es
+--mayor que 10 euros y en caso afirmativo, imprima el nombre y el precio del artículo por pantalla.
+
+--b) Construya un procedimiento que seleccione el artículo de mayor precio que esté almacenado en la
+--tabla, almacene su valor en una variable y luego imprímalo.
+
+--c) Construya un procedimiento que actualice el precio del artículo cuyo código es ‘A005’ según las
+--siguientes indicaciones:
+--− Si el artículo tiene un precio menor de 1 euro, su precio debe ser aumentado en 25 céntimos.
+--− Si está comprendido entre 1 euro y 10 euros su precio aumentará un 10 % .Si excede los 10
+--euros su precio aumentará en un 20 %.
+--− Si el precio es NULL, el aumento es 0.
+
+--d) Construya un procedimiento similar al del apartado c donde el usuario introduzca como
+--parámetroel código del artículo que desee modificar su precio.
+
+--20. Crear un procedimiento que en la tabla emp incrementar el salario el 10% a los empleados que
+--tengan una comisión superior al 5% del salario.
+
+--21. Crear un procedimiento que inserte un empleado en la tabla EMP. Su número será superior a los
+--existentes y la fecha de incorporación a la empresa será la actual.
